@@ -21,9 +21,6 @@ def heat_map(data_df):
                      cbar_kws={'fraction': 0.046, 'pad': 0.03})
     plt.savefig(SHAP_plot_save_path + 'heat.png', bbox_inches='tight')
 
-def compare(true_value, predict_value):
-    pass
-
 def relevance_plot(train_shap_values, feature_train, abscissa, ordinate):
     abs_values = feature_train[str(abscissa)].values
     ord_values = feature_train[str(ordinate)].values
