@@ -14,10 +14,37 @@ _warm_start = True
 
 def run_auto_param(train_feature, train_target, test_feature, test_target, param, feature_train_summary):
     param_select_path = './select_param/'
-    score = 0
-    best_param = 0
 
-    for layer1 in range(1, 101):
+    for layer_number in range(1, 4):
+        if layer_number == 1:
+            for layer1 in range(1, 101):
+                param = (layer1)
+                test_score, RMSE_score = MLP_auto(train_feature, train_target, test_feature, test_target, param)
+                if test_score > 0 and RMSE_score < 6:
+                    print(param)
+            print("layer 1 finish")
+        elif layer_number == 2:
+            for layer1 in range(1, 101):
+                for layer2 in range(1, 101):
+                    if layer2 <= layer1:
+                        param = (layer1, layer2)
+                        test_score, RMSE_score = MLP_auto(train_feature, train_target, test_feature, test_target, param)
+                        if test_score > 0 and RMSE_score < 6:
+                            print(param)
+            print("layer 2 finish")
+        elif layer_number == 3:
+            for layer1 in range(1, 101):
+                for layer2 in range(1, 101):
+                    for layer3 in range(1, 101):
+                        if layer2 <= layer1 and layer3 <= layer2:
+                            param = (layer1, layer2, layer3)
+                            test_score, RMSE_score = MLP_auto(train_feature, train_target, test_feature, test_target, param)
+                            if test_score > 0 and RMSE_score < 6:
+                                print(param)
+            print("layer 3 finish")
+
+
+"""    for layer1 in range(1, 101):
         if layer1 % 10 == 0:
             print(str(layer1) + " finish at " + str(time.strftime("%Y-%m-%d-%H-%M-%S", time.localtime())))
         for layer2 in range(1, 101):
@@ -26,11 +53,8 @@ def run_auto_param(train_feature, train_target, test_feature, test_target, param
                     param = (layer1, layer2, layer3)
                     test_score = MLP_auto(train_feature, train_target, test_feature, test_target, param)
                     if test_score > 0:
-                        if test_score > score:
-                            score = test_score
-                            best_param = param
                         print(param)
-
+"""
 
 """    for param_num in range(len(param)):
         if param_num % 10 == 0:
@@ -51,44 +75,4 @@ def run_auto_param(train_feature, train_target, test_feature, test_target, param
             plt.close()"""
 
 
-"""def run_auto_param(train_feature, train_target, test_feature, test_target):
-    score = 0
-    best_param = 0
-    for layer_number in range(1, 4):
-        if layer_number == 1:
-            for layer1 in range(1, 101):
-                param = (layer1)
-                test_score = MLP_auto(train_feature, train_target, test_feature, test_target, param)
-                if test_score > 0:
-                    if test_score > score:
-                        score = test_score
-                        best_param = param
-                    print(param)
-            print("layer 1 finish")
-        elif layer_number == 2:
-            for layer1 in range(1, 101):
-                for layer2 in range(1, 101):
-                    if layer2 <= layer1:
-                        param = (layer1, layer2)
-                        test_score = MLP_auto(train_feature, train_target, test_feature, test_target, param)
-                        if test_score > 0:
-                            if test_score > score:
-                                score = test_score
-                                best_param = param
-                            print(param)
-            print("layer 2 finish")
-        elif layer_number == 3:
-            for layer1 in range(1, 101):
-                for layer2 in range(1, 101):
-                    for layer3 in range(1, 101):
-                        if layer2 <= layer1 and layer3 <= layer2:
-                            param = (layer1, layer2, layer3)
-                            test_score = MLP_auto(train_feature, train_target, test_feature, test_target, param)
-                            if test_score > 0:
-                                if test_score > score:
-                                    score = test_score
-                                    best_param = param
-                                print(param)
-            print("layer 3 finish")
 
-    print(best_param)"""

@@ -16,8 +16,6 @@ def train_data_value(file):
     feature_value = data_df.iloc[:, :-1]
     target_value = data_df.iloc[:, -1]
     cols = feature_value.columns
-    min_max_scaler = preprocessing.MinMaxScaler(feature_range=(0, 100))
-    # feature_value = min_max_scaler.fit_transform(feature_value)
     feature_value = pd.DataFrame(feature_value, columns=cols)
     feature_train_summary = shap.kmeans(feature_value, 10)
 
@@ -28,8 +26,6 @@ def test_data_value(file):
     data_df = pd.DataFrame(data, columns=data.columns)
     feature_value = data_df.iloc[:, :-1]
     target_value = data_df.iloc[:, -1]
-    min_max_scaler = preprocessing.MinMaxScaler(feature_range=(0, 100))
-    # feature_value = min_max_scaler.fit_transform(feature_value)
 
     return feature_value, target_value
 

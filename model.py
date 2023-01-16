@@ -94,16 +94,10 @@ def MLP_auto(feature_train, target_train, feature_test, target_test, hidden_laye
                              warm_start=_warm_start)
     trained_model = MLP_model.fit(feature_train, target_train)
     R2_train_score = MLP_model.score(feature_train, target_train)
-    # print("MLP R2 Scores: " + str(R2_train_score))
     train_predict = MLP_model.predict(feature_train)
     test_predict = MLP_model.predict(feature_test)
     R2_test_score = MLP_model.score(feature_test, target_test)
-    # print("MLP R2 test Scores:" + str(R2_test_score))
-    test_MAE = mean_absolute_error(target_test, test_predict)
-    # print("Test data MAE:" + str(test_MAE))
-    test_RMSE = mean_squared_error(target_test, test_predict) ** 0.5
-    # print("Test data RMSE:" + str(test_RMSE))
-    # cross_val_RMSE = -1 * cross_val_score(MLP_model, feature_train, target_train, cv=kf, scoring='neg_root_mean_squared_error')
-    # Average_RMSE_score = cross_val_RMSE.mean()
+    cross_val_RMSE = -1 * cross_val_score(MLP_model, feature_train, target_train, cv=kf, scoring='neg_root_mean_squared_error')
+    Average_RMSE_score = cross_val_RMSE.mean()
 
-    return R2_test_score
+    return R2_test_score, Average_RMSE_score
