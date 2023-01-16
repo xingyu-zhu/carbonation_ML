@@ -2,13 +2,11 @@ import pandas as pd
 from sklearn import preprocessing
 import shap
 
-
 def read_data(file):
     data = pd.read_excel(file, 0)
     data = data.iloc[:, :]
 
     return data
-
 
 def train_data_value(file):
     data = read_data(file)

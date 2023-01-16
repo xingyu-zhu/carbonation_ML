@@ -43,7 +43,6 @@ def run_auto_param(train_feature, train_target, test_feature, test_target, param
                                 print(param)
             print("layer 3 finish")
 
-
 """    for layer1 in range(1, 101):
         if layer1 % 10 == 0:
             print(str(layer1) + " finish at " + str(time.strftime("%Y-%m-%d-%H-%M-%S", time.localtime())))
@@ -73,6 +72,3 @@ def run_auto_param(train_feature, train_target, test_feature, test_target, param
             plt.savefig(param_select_path + str(param[param_num]) + ".png")
             # plt.show()
             plt.close()"""
-
-
-
