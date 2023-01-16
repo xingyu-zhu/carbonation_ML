@@ -14,20 +14,6 @@ _random_state = 3
 _max_iter = 6000
 _warm_start = True
 
-def find_best_parameters(feature_train, target_train):
-    parameters = {
-        'solver': ('lbfgs', 'adam'),
-        'hidden_layer_sizes': ((32, 16, 8, 4, 2), (64, 32, 16, 8, 4), (128, 64, 32, 16, 8)),
-        'alpha': (0.001, 0.0001),
-        'tol': (0.001, 0.0001),
-        'max_iter': (20000, 25000),
-        'max_fun': (20000, 25000)
-    }
-    MLP = MLPRegressor()
-    clf = GridSearchCV(MLP, parameters, scoring='neg_mean_squared_error', cv=10)
-    clf.fit(feature_train, target_train)
-    sorted(clf.cv_results_.keys())
-
 def MLP_predict(feature_train, target_train, feature_test, target_test):
     kf = KFold(n_splits=10, shuffle=True, random_state=5)
     MLP_model = MLPRegressor(solver=_solver, alpha=_alpha, hidden_layer_sizes=_hidden_layer_nodes,
