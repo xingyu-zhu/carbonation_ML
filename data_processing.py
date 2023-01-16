@@ -33,7 +33,7 @@ def test_data_value(file):
 
     return feature_value, target_value
 
-def SVM_data_processing(file):
+def scaler_data_processing(file):
     data = read_data(file)
     data_df = pd.DataFrame(data, columns=data.columns)
     feature_value = data_df.iloc[:, :-1]
