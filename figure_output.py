@@ -21,11 +21,11 @@ def heat_map(data_df):
                      cbar_kws={'fraction': 0.046, 'pad': 0.03})
     plt.savefig(SHAP_plot_save_path + 'heat.png', bbox_inches='tight')
 
-def relevance_plot(train_shap_values, feature_train, abscissa, ordinate):
-    abs_values = feature_train[str(abscissa)].values
-    ord_values = feature_train[str(ordinate)].values
-    abs_num = int(feature_train.columns.get_loc(str(abscissa)))
-    ord_num = int(feature_train.columns.get_loc(str(ordinate)))
+def relevance_plot(train_shap_values, feature_train, feature_name1, feature_name2):
+    feature_values1 = feature_train[str(feature_name1)].values
+    feature_values2 = feature_train[str(feature_name2)].values
+    abs_num = int(feature_train.columns.get_loc(str(feature_name1)))
+    ord_num = int(feature_train.columns.get_loc(str(feature_name2)))
 
     shap_values = train_shap_values[:, abs_num] + train_shap_values[:, ord_num]
     bottom = shap_values.min() - 1
@@ -41,8 +41,8 @@ def relevance_plot(train_shap_values, feature_train, abscissa, ordinate):
     plt.rcParams["axes.labelweight"] = "bold"
     ax1 = plt.axes(projection='3d')
     ax1.set_zlim(-25, 25)
-    im = ax1.scatter3D(abs_values, ord_values, shap_values, c=c, cmap='jet')
-    ax1.scatter3D(abs_values, ord_values, -25)
+    im = ax1.scatter3D(feature_values1, feature_values2, shap_values, c=c, cmap='jet')
+    ax1.scatter3D(feature_values1, feature_values2, -25)
     ax1.w_xaxis.set_pane_color((0.9, 0.9, 0.9, 0.6))
     ax1.w_yaxis.set_pane_color((0.9, 0.9, 0.9, 0.6))
     ax1.w_zaxis.set_pane_color((0.9, 0.9, 0.9, 0.6))
@@ -50,18 +50,18 @@ def relevance_plot(train_shap_values, feature_train, abscissa, ordinate):
     plt.grid(True)
     plt.grid(alpha=0.2)
     for number in range(len(shap_values)):
-        xs = [abs_values[number], abs_values[number]]
-        ys = [ord_values[number], ord_values[number]]
+        xs = [feature_values1[number], feature_values1[number]]
+        ys = [feature_values2[number], feature_values2[number]]
         zs = [shap_values[number], -25]
         plt.plot(xs, ys, zs, c='grey', linestyle='--', alpha=0.1, linewidth=0.8)
     plt.tick_params(labelsize=13, pad=0.1)
-    plt.xlabel(str(abscissa), fontsize=15)
-    plt.ylabel(str(ordinate), fontsize=15)
+    plt.xlabel(str(feature_name1), fontsize=15)
+    plt.ylabel(str(feature_name2), fontsize=15)
     plt.colorbar(im, fraction=0.1, shrink=0.6, pad=0.1)
     ax1.view_init(elev=20)
     # plt.title(str(abscissa) + " " + str(ordinate))
     # plt.show()
-    plt.savefig(SHAP_plot_save_path + str(abscissa) + "_" + str(ordinate) + ".png")
+    plt.savefig(SHAP_plot_save_path + str(feature_name1) + "_" + str(feature_name2) + ".png")
 
 def material_relevance_plot(feature_train_1, feature_train_2, train_shap_values_1, train_shap_values_2, feature_name1, feature_name2):
     shap_values = train_shap_values_1 + train_shap_values_2
