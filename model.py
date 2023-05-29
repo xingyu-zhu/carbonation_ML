@@ -6,6 +6,7 @@ from sklearn.model_selection import cross_val_score, KFold
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.svm import SVR
 
+# These parameters were tested and considered to be optimal solutions.
 _solver = 'lbfgs'
 _activation = 'relu'
 _alpha = 0.001
@@ -36,8 +37,6 @@ def MLP_predict(feature_train, target_train, feature_test, target_test):
     print("Test data MAE:" + str(test_MAE))
     test_RMSE = mean_squared_error(target_test, test_predict) ** 0.5
     print("Test data RMSE:" + str(test_RMSE))
-    # print(test_predict)
-    # print(target_test)
 
     return MLP_model.predict, train_predict, test_predict, trained_model
 

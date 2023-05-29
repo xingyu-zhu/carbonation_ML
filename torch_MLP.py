@@ -1,7 +1,7 @@
 import shap
 from data_processing import train_data_value, test_data_value, scaler_data_processing
 from model import MLP_predict, RF_predict, SVR_predict
-from figure_output import heat_map, SHAP_summary_plot, predict_plot, other_SHAP_plot, test_predict_plot
+from figure_output import heat_map, SHAP_plot, predict_compare_plot, other_SHAP_plot, test_predict_plot
 from auto_param import run_auto_param
 from data_statistics import bar_plot
 import os
@@ -38,9 +38,9 @@ def result_plot(model_predict, feature_train_summary, train_feature, train_targe
     heat_map(train_feature)
     test_predict_plot(test_data_predict, test_target)
     shap.initjs()
-    SHAP_summary_plot(model_predict, feature_train_summary, train_feature)
+    SHAP_plot(model_predict, feature_train_summary, train_feature)
     other_SHAP_plot(model_predict, feature_train_summary, train_feature)
-    predict_plot(train_target, train_data_predict, test_target, test_data_predict)
+    predict_compare_plot(train_target, train_data_predict, test_target, test_data_predict)
 
 #
 def run_model():
