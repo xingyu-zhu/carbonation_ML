@@ -1,4 +1,3 @@
-# carbonation_ML
-### This program builds machine learning models to predict CO2 Sequestration values in carbonation by python.
-### The machine learning models based on scikit-learn with version 1.2.0.
-### The program is developed by University of Science and Technology Beijing and The Hong Kong Polytechnic University.
+# Introduction
+The machine learning methods to predict the CO<sub>2</sub> Sequestration values in carbonation. Models were developed based on [scikit-learn version 1.2.0](https://scikit-learn.org/stable/) and [SHAP version 0.41.0](https://shap.readthedocs.io/en/latest/index.html#).
+**_The program was developed by University of Science and Technology Beijing and The Hong Kong Polytechnic University._**
