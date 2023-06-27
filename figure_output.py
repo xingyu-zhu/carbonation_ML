@@ -10,6 +10,7 @@ import shap
 
 SHAP_plot_save_path = './SHAP_plot/'
 feature_SHAP_plot_path = 'All feature SHAP plots/'
+heat_map_path = SHAP_plot_save_path + "heatmap/"
 
 def get_label_name(feature_name):
     ignore_list = ["Temperature", "Carbonation Time", "Particle Size", "CaO", "MgO", "MnO", "L/S"]
@@ -36,8 +37,7 @@ def feature_name_replace(feature_name: str):
               + "\033[0m")
 
 def heat_map(data_df):
-    heat_map_path = SHAP_plot_save_path + "heatmap/"
-    fig = plt.figure(dpi=600, figsize=(6, 6))
+    plt.figure(dpi=600, figsize=(6, 6))
     plt.rcParams['font.size'] = 15
     plt.rcParams["font.weight"] = "bold"
     plt.rcParams["axes.labelweight"] = "bold"
@@ -89,7 +89,7 @@ def material_relevance_plot(feature_train_1, feature_train_2, train_shap_values_
     top = int(shap_values.max()) + 1
 
     c = shap_values
-    fig = plt.figure(dpi=600, figsize=(6, 6))
+    plt.figure(dpi=600, figsize=(6, 6))
     plt.rcParams['font.size'] = 13
     plt.rcParams["font.weight"] = "bold"
     plt.rcParams["axes.labelweight"] = "bold"
