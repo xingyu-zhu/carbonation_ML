@@ -1,5 +1,5 @@
 """
-This code is jointly developed by the School of Energy and Environment of University of Science and Technology Beijing
+This program was jointly developed by the School of Energy and Environment of University of Science and Technology Beijing
   and the Department of Electronic Information Engineering of Hong Kong Polytechnic University.
 The paper has been published in the journal Environmental Science and Technology.
 Please note that the conclusions presented in the paper are based on the results of the Apple M1 chip training model.
@@ -32,11 +32,11 @@ Please note that we used an independent paper dataset as the test dataset,
 so we did not partition the dataset proportionally.
 """
 # The dataset include train dataset
-train_data_file = './train_data.xlsx'
+train_data_file = './Dataset/train_data.xlsx'
 # The dataset include test dataset
-test_data_file = './test_data.xlsx'
+test_data_file = './Dataset/test_data.xlsx'
 # The dataset include all data
-dataset_file = './dataset.xlsx'
+dataset_file = './Dataset/dataset.xlsx'
 
 def result_plot(model_predict, feature_train_summary, train_feature, train_target, train_data_predict, test_target, test_data_predict):
     heat_map(train_feature)
