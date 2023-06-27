@@ -35,7 +35,6 @@ def feature_name_replace(feature_name: str):
         print("\033[32mTypeError: Type of parameter 'feature_name' is str, input value is " + str(type(feature_name))
               + "\033[0m")
 
-
 def heat_map(data_df):
     heat_map_path = SHAP_plot_save_path + "heatmap/"
     fig = plt.figure(dpi=600, figsize=(6, 6))
