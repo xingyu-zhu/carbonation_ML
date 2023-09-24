@@ -38,7 +38,7 @@ def MLP_predict(feature_train, target_train, feature_test, target_test):
     test_RMSE = mean_squared_error(target_test, test_predict) ** 0.5
     print("Test data RMSE:" + str(test_RMSE))
 
-    return MLP_model.predict, train_predict, test_predict, trained_model
+    return MLP_model.predict, train_predict, test_predict, trained_model, MLP_model
 
 def RF_predict(feature_train, target_train, feature_test, target_test):
     kf = KFold(n_splits=10, shuffle=True, random_state=5)
