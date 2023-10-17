@@ -40,12 +40,12 @@ test_data_file = './Dataset/test_data.xlsx'
 dataset_file = './Dataset/dataset.xlsx'
 
 def result_plot(model_predict, feature_train_summary, train_feature, train_target, train_data_predict, test_target, test_data_predict):
-    heat_map(train_feature)
+    # heat_map(train_feature)
     test_predict_plot(test_data_predict, test_target)
     shap.initjs()
     SHAP_plot(model_predict, feature_train_summary, train_feature)
-    other_SHAP_plot(model_predict, feature_train_summary, train_feature)
-    predict_compare_plot(train_target, train_data_predict, test_target, test_data_predict)
+    # other_SHAP_plot(model_predict, feature_train_summary, train_feature)
+    # predict_compare_plot(train_target, train_data_predict, test_target, test_data_predict)
 
 def run_model():
     print("Data is processing...")
@@ -56,17 +56,13 @@ def run_model():
     # run_auto_param(train_feature, train_target, test_feature, test_target, param, feature_train_summary)
     print("Model is training...")
     model_predict, train_data_predict, test_data_predict, trained_model, MLP_model = MLP_predict(train_feature, train_target, test_feature, test_target)
-    x, y = sa_algorithm(func=MLP_model.predict, x0=[[90, 5, 1, 100, 74, 40, 15, 25, 10, 7, 3, 20]], T_max=300, T_min=1e-3, L=50, max_stay=50,
-                        lb=[90, 5, 1, 100, 74, 22.38, 4.2, 6.4, 0.38, 0.25, 0, 20],
-                        ub=[90, 5, 1, 100, 74, 54.8, 10.9, 32.5, 13, 48, 10.62, 20])
-    print("best x list" + str(x))
-    print('best y list' + str(y))
-    print(x[-1])
-    print(y[-1])
+    # x, y = sa_algorithm(func=MLP_model.predict, x0=[[90, 5, 1, 100, 74, 40, 15, 25, 10, 7, 3, 20]], T_max=300, T_min=1e-3, L=50, max_stay=50,
+    #                     lb=[90, 5, 1, 100, 74, 22.38, 4.2, 6.4, 0.38, 0.25, 0, 20],
+    #                     ub=[90, 5, 1, 100, 74, 54.8, 10.9, 32.5, 13, 48, 10.62, 20])
     # model_predict, train_data_predict, test_data_predict = RF_predict(train_feature, train_target, test_feature, test_target)
     # model_predict, train_data_predict, test_data_predict = SVR_predict(train_feature, train_target, test_feature, test_target)
     # print("Generate pictures...")
-    # result_plot(model_predict, feature_train_summary, train_feature, train_target, train_data_predict, test_target, test_data_predict)
+    result_plot(model_predict, feature_train_summary, train_feature, train_target, train_data_predict, test_target, test_data_predict)
 
 # Make a directory to save result picture
 def make_directory():

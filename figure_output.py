@@ -17,11 +17,11 @@ def get_label_name(feature_name):
     if feature_name in ignore_list:
         return feature_name
     elif feature_name == "CO2 Partial Pressure":
-        return "$CO_2$ CO2 Partial Pressure"
+        return "$CO_2$ Partial Pressure"
     elif feature_name == "CO2 Concentration":
         return "$CO_2$ Concentration"
     elif feature_name == "SiO2":
-        return "$SiO_2"
+        return "$SiO_2$"
     elif feature_name == "Al2O3":
         return "$Al_2$$O_3$"
     elif feature_name == "Fe2O3":
@@ -134,19 +134,19 @@ def get_material_shap_value(feature_name, train_shap_value, feature_train):
 def SHAP_plot(predict_model, feature_train_summary, feature_train):
     explainer = shap.KernelExplainer(predict_model, feature_train_summary)
     shap_values = explainer.shap_values(feature_train)
-    feature_SHAP(9, feature_train['Fe2O3'], shap_values)
+    # feature_SHAP(9, feature_train['Fe2O3'], shap_values)
 
     # All features SHAP values plots
-    plt.figure(dpi=600, figsize=(10, 8))
     feature_name_list = ["Temperature", "CO2 Partial Pressure", "CO2 Concentration", "Carbonation Time", "Particle Size"
         , "CaO", "MgO", "MnO", "SiO2", "Al2O3", "Fe2O3", "L/S"]
 
     for feature_name in feature_name_list:
+        plt.figure(dpi=600, figsize=(10, 8))
         feature_value, SHAP_value = get_material_shap_value(feature_name, shap_values, feature_train)
-        plt.scatter(feature_value, SHAP_value)
-        plt.tick_params(labelsize=25, pad=0.1)
-        plt.xlabel(get_label_name(feature_name=feature_name) + " Value", fontsize=25)
-        plt.ylabel("SHAP Value of " + get_label_name(feature_name=feature_name), fontsize=25)
+        plt.scatter(feature_value, SHAP_value, s=10)
+        plt.tick_params(labelsize=18, pad=0.1)
+        plt.xlabel(get_label_name(feature_name=feature_name) + " Value", fontsize=18)
+        plt.ylabel("SHAP Value of " + get_label_name(feature_name=feature_name), fontsize=18)
         plt.savefig(SHAP_plot_save_path + feature_SHAP_plot_path + feature_name_replace(feature_name) + " scatter.png")
         plt.close()
 
@@ -177,12 +177,18 @@ def SHAP_plot(predict_model, feature_train_summary, feature_train):
     material_relevance_plot(MnO_feature_value, Fe2O3_feature_value, MnO_shap_value, Fe2O3_shap_value, "MnO", "Fe2O3")
     plt.close()
 
-def feature_SHAP(feature_number, feature_train, SHAP_values):
+    for feature_num in range(12):
+        feature_SHAP(feature_number=feature_num, feature_name=feature_name_list[feature_num],
+                     feature_train=feature_train[feature_name_list[feature_num]], SHAP_values=shap_values)
+
+def feature_SHAP(feature_number, feature_name, feature_train, SHAP_values):
     fig = plt.figure(dpi=600, figsize=(6, 6))
     plt_x = feature_train
     feature_SHAP_value = SHAP_values[:, feature_number]
-    plt.scatter(plt_x, feature_SHAP_value)
-    plt.savefig(SHAP_plot_save_path + "feature.png")
+    plt.scatter(plt_x, feature_SHAP_value, s=10)
+    plt.xlabel(feature_name + " Value")
+    plt.ylabel("SHAP Value of " + feature_name)
+    plt.savefig(SHAP_plot_save_path + feature_name_replace(feature_name=feature_name) + ".png")
     plt.close()
 
 def other_SHAP_plot(predict_model, feature_train_summary, feature_train):
