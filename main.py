@@ -56,9 +56,9 @@ def run_model():
     # run_auto_param(train_feature, train_target, test_feature, test_target, param, feature_train_summary)
     print("Model is training...")
     model_predict, train_data_predict, test_data_predict, trained_model, MLP_model = MLP_predict(train_feature, train_target, test_feature, test_target)
-    # x, y = sa_algorithm(func=MLP_model.predict, x0=[[90, 5, 1, 100, 74, 40, 15, 25, 10, 7, 3, 20]], T_max=300, T_min=1e-3, L=50, max_stay=50,
-    #                     lb=[90, 5, 1, 100, 74, 22.38, 4.2, 6.4, 0.38, 0.25, 0, 20],
-    #                     ub=[90, 5, 1, 100, 74, 54.8, 10.9, 32.5, 13, 48, 10.62, 20])
+    x, y = sa_algorithm(func=MLP_model.predict, x0=[[90, 5, 1, 100, 74, 40, 15, 25, 10, 7, 3, 20]], T_max=300, T_min=1e-3, L=50, max_stay=50,
+                        lb=[90, 5, 1, 100, 74, 22.38, 4.2, 6.4, 0.38, 0.25, 0, 20],
+                        ub=[90, 5, 1, 100, 74, 54.8, 10.9, 32.5, 13, 48, 10.62, 20])
     # model_predict, train_data_predict, test_data_predict = RF_predict(train_feature, train_target, test_feature, test_target)
     # model_predict, train_data_predict, test_data_predict = SVR_predict(train_feature, train_target, test_feature, test_target)
     # print("Generate pictures...")
